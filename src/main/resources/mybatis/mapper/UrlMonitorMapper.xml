@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiban.mapper.UrlMonitorMapper" >
+  <resultMap id="BaseResultMap" type="com.yiban.entity.UrlMonitor" >
+    <id column="url_id" property="urlId" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="sensitive_work" property="sensitiveWork" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    url_id, url, sensitive_work
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from urlmonitor
+    where url_id = #{urlId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from urlmonitor
+    where url_id = #{urlId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yiban.entity.UrlMonitor" >
+    insert into urlmonitor (url_id, url, sensitive_work
+      )
+    values (#{urlId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{sensitiveWork,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiban.entity.UrlMonitor" >
+    insert into urlmonitor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="urlId != null" >
+        url_id,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="sensitiveWork != null" >
+        sensitive_work,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="urlId != null" >
+        #{urlId,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sensitiveWork != null" >
+        #{sensitiveWork,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiban.entity.UrlMonitor" >
+    update urlmonitor
+    <set >
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sensitiveWork != null" >
+        sensitive_work = #{sensitiveWork,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where url_id = #{urlId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiban.entity.UrlMonitor" >
+    update urlmonitor
+    set url = #{url,jdbcType=VARCHAR},
+      sensitive_work = #{sensitiveWork,jdbcType=VARCHAR}
+    where url_id = #{urlId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yiban.mapper.MsgUserMapper" >
+  <resultMap id="BaseResultMap" type="com.yiban.entity.MsgUser" >
+    <id column="yiban_id" property="yibanId" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    yiban_id, nick_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from msguser
+    where yiban_id = #{yibanId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from msguser
+    where yiban_id = #{yibanId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yiban.entity.MsgUser" >
+    insert into msguser (yiban_id, nick_name)
+    values (#{yibanId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiban.entity.MsgUser" >
+    insert into msguser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="yibanId != null" >
+        yiban_id,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="yibanId != null" >
+        #{yibanId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiban.entity.MsgUser" >
+    update msguser
+    <set >
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where yiban_id = #{yibanId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiban.entity.MsgUser" >
+    update msguser
+    set nick_name = #{nickName,jdbcType=VARCHAR}
+    where yiban_id = #{yibanId,jdbcType=VARCHAR}
+  </update>
+</mapper>

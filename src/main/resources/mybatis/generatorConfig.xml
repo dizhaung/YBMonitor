@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="jdbc.properties"/>
+    <context id="mysqlTables" targetRuntime="MyBatis3">
+        <!-- 不生成注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}"/>
+
+        <!--指定生成的类型为java类型，避免数据库中number等类型字段 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--自动生成的实体的存放包路径 -->
+        <javaModelGenerator targetPackage="com.yiban.entity"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--自动生成的*Mapper.xml文件存放路径 -->
+        <sqlMapGenerator targetPackage="mybatis.mapper"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--自动生成的*Mapper.java存放路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yiban.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="msgUser" domainObjectName="MsgUser"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--<ignoreColumn column="" />//忽略字段-->
+        </table>
+
+        <table tableName="urlMonitor" domainObjectName="UrlMonitor"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--<generatedKey column="ID" sqlStatement="select uuid_short()" identity="false"/>-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+        </table>
+    </context>
+
+
+</generatorConfiguration>
